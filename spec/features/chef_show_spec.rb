@@ -38,4 +38,21 @@ RSpec.describe 'When a user visits a chef show page', type: :feature do
     expect(page).to have_content(@ingredient4.name) 
     expect(page).to have_content(@ingredient5.name) 
   end
+  it "shows the three most popular ingredients the chef uses" do
+
+    @dish3 = @chef1.dishes.create!(name: "Spaghetti", description: "The classic")
+
+    DishIngredient.create!(dish: @dish3, ingredient: @ingredient2)
+    DishIngredient.create!(dish: @dish3, ingredient: @ingredient5)
+
+    
+    within("#popular-ingredients") do
+      expect(@ingredient1.name).to appear_before(@ingredient4.name)
+      expect(@ingredient4.name).to appear_before(@ingredient5.name)
+    end
+  end
 end 
+
+# When I visit a chef's show page
+# I see the three most popular ingredients that the chef uses in their dishes
+# (Popularity is based off of how many dishes use that ingredient)
