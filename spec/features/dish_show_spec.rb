@@ -28,6 +28,3 @@ RSpec.describe 'When a user visits a dish show page', type: :feature do
     expect(page).to have_content(300)
   end
 end 
-
-# When I visit a dish's show page
-# I see the total calorie count for that dish.
